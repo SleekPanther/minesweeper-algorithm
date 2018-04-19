@@ -4,38 +4,53 @@
 MINE_FLAG = -1
 
 def displayMines(inputBoard):
-    board=[]
+    answerBoard=[]
     for row in inputBoard:
-        board.append([0]*len(row))
+        newRow = []
+        for cell in row:
+            newRow.append(cell)
+        answerBoard.append(newRow)
 
-    for i in range(len(inputBoard)):
-        for j in range(len(inputBoard[i])):
-            if inputBoard[i][j] == MINE_FLAG:   #found a mine
-                if i-1 >= 0:        #left
-                    board[i-1][j]+=1
-                if i+1 < len(inputBoard[i]):    #right
-                    board[i+1][j]+=1
-                if j-1 >= 0:        #above
-                    board[i][j-1]+=1
-                if j+1 < len(inputBoard):       #below
-                    board[i][j+1]+=1
+    bottomEdge = len(inputBoard) -1
+    rightEdge = len(inputBoard[0]) -1
 
-                if i-1 >= 0 and j-1 >= 0:    #diagonal top left
-                    board[i-1][j-1]+=1
-                if i+1 < len(inputBoard[i]) and j+1 < len(inputBoard):    #diagonal bottom right
-                    board[i+1][j+1]+=1
-                if i+1 < len(inputBoard[i]) and j-1 >= 0:    #diagonal top right
-                    board[i+1][j-1]+=1
-                if i-1 < len(inputBoard[i]) and j+1 < len(inputBoard):    #diagonal bottom left
-                    board[i-1][j+1]+=1
+    for y in range(bottomEdge+1):
+        for x in range(rightEdge+1):
+            if inputBoard[y][x] == MINE_FLAG:   #found a mine
+                #left
+                if x-1 >= 0:
+                    if inputBoard[y][x-1] != MINE_FLAG:
+                        answerBoard[y][x-1]+=1
+                #right
+                if x+1 <= rightEdge:
+                    if inputBoard[y][x+1] != MINE_FLAG:
+                        answerBoard[y][x+1]+=1
+                #below
+                if y+1 <= bottomEdge:
+                    if inputBoard[y+1][x] != MINE_FLAG:
+                        answerBoard[y+1][x]+=1
+                #above
+                if y-1 >= 0:
+                    if inputBoard[y-1][x] != MINE_FLAG:
+                        answerBoard[y-1][x]+=1
+                #diagonal top left
+                if y-1 >= 0 and x-1 >= 0:
+                    if inputBoard[y-1][x-1] != MINE_FLAG:
+                        answerBoard[y-1][x-1]+=1
+                #diagonal top right
+                if y-1 >=0 and x+1 <= rightEdge:
+                    if inputBoard[y-1][x+1] != MINE_FLAG:
+                        answerBoard[y-1][x+1]+=1
+                #diagonal bottom right
+                if y+1 <= bottomEdge and x+1 <= rightEdge:
+                    if inputBoard[y+1][x+1] != MINE_FLAG:
+                        answerBoard[y+1][x+1]+=1
+                #diagonal bottom left
+                if y+1 <= bottomEdge and x-1 >= 0:
+                    if inputBoard[y+1][x-1] != MINE_FLAG:
+                        answerBoard[y+1][x-1]+=1
 
-    #overwrite actual mine positions
-    for i in range(len(inputBoard)):
-        for j in range(len(inputBoard[i])):
-            if inputBoard[i][j] == MINE_FLAG:
-                board[i][j] = MINE_FLAG
-        
-    printBoard(board)
+    printBoard(answerBoard)
     
 
 def printBoard(board):
@@ -43,11 +58,13 @@ def printBoard(board):
         print(row)
 
 
-board=[[0,0,-1],
-       [0,-1,-1],
-       [0,0,-1]]
+board=[[0, 0,0],
+       [0,0,-1],
+       [0, -1, 0],
+       [-1,-1,0]]
 
-print('original board')
+print('Original board')
 printBoard(board)
-print('answers')
+
+print('Answers')
 displayMines(board)
