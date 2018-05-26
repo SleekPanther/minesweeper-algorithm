@@ -57,7 +57,7 @@ def displayMines(inputBoard):
 		for y in range(bottomEdge+1):
 
 			if inputBoard[y][x] == MINE_FLAG:	#found a mine, search surrounding neighbors
-				#Search 9 adjacent squares
+				#Search 8 surrounding squares
 				for xTemp in range(x-1, x+2):	#starts 1 to the left & x+2 so that x+1 is the last thing checked
 					for yTemp in range(y-1, y+2):
 						if xTemp>=0 and xTemp<=rightEdge and yTemp>=0 and yTemp <=bottomEdge:	#make sure array indexes are in bounds
