@@ -76,8 +76,10 @@ def copyBoard(inputBoard):
 
 def printBoard(board):
 	for row in board:
-		#make negative stuff align with min width
-		print(row)
+		print('|', end='')
+		for cell in row:
+			print(format(cell, '3d'), end=' ')
+		print('|')
 
 
 board=[ [0, 0,0],
