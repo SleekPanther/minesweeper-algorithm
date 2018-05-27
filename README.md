@@ -14,8 +14,8 @@ Simple iterative solution to counts mines in [Minesweeper](https://en.wikipedia.
   - All coordinates are checked to make sure they don't go out of bounds of the edges of the board
   - The current square is skipped by also checking if the value at `board[ytemp]pxTemp]` is a mine before incrementing
   
-  ## Runtime
-  O(mn) for looping over the entire board  
-  O(8) for checking surrounding squares  
-  O(8*mn) combined
-  ⇒ **O(mn)**
+## Runtime
+O(mn) for looping over the entire board  
+O(8) for checking surrounding squares  
+O(8*mn) combined
+⇒ **O(mn)**
